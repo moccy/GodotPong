@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://7iopqw7sqfk3"]
+
+[ext_resource type="PackedScene" uid="uid://du6i3dpgp4hn5" path="res://ball.tscn" id="1_cc18q"]
+[ext_resource type="PackedScene" uid="uid://rfnrmognkfk3" path="res://paddle.tscn" id="2_l0253"]
+
+[sub_resource type="Curve2D" id="Curve2D_ivvek"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="Main" type="Node"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Ball" parent="." instance=ExtResource("1_cc18q")]
+position = Vector2(1021, 531)
+InitialDirection = 1
+Speed = 800.0
+
+[node name="LeftPaddle" parent="." instance=ExtResource("2_l0253")]
+position = Vector2(48, 544)
+
+[node name="RightPaddle" parent="." instance=ExtResource("2_l0253")]
+position = Vector2(1872, 544)
+UpAction = "up_p2"
+DownAction = "down_p2"
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ivvek")
