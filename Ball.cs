@@ -13,6 +13,9 @@ public partial class Ball : Area2D
 
 	[Export]
 	public int MinAngle = 45;
+	
+	[Signal]
+	public delegate void SideHitEventHandler(BinaryDirection side);
 
 	private Vector2 _direction;
 	private float _radius;
@@ -91,9 +94,17 @@ public partial class Ball : Area2D
 
 		if (hitLeft || hitRight)
 		{
-			// TODO: Reset Ball and score point
-			
 			_direction.X = -_direction.X;
+		}
+
+		if (hitLeft)
+		{
+			EmitSignal(SignalName.SideHit, Variant.From(BinaryDirection.Left));
+		}
+
+		if (hitRight)
+		{
+			EmitSignal(SignalName.SideHit, Variant.From(BinaryDirection.Right));
 		}
 	}
 }
